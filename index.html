@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Boozio</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <div class="container col-md-8 col-md-offset-2">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li>{{#link-to 'drinks'}}Home{{/link-to}}</li>
+          <li>{{#link-to 'ingredients'}}Ingredients{{/link-to}}</li>
+          <li>{{#link-to 'newdrink'}}New Drink{{/link-to}}</li>
+        </ul>
+        <h3 class="text-muted">Boozio <small>get your drink on, on the interwebs.</small></h3>
+      </div>
+
+      <hr />
+
+      <div class="12">
+
+        {{outlet}}
+
+      </div>
+
+      <div class="footer">
+        <p>&copy; Boozio 2014</p>
+      </div>
+    </div>
+
+  </script>
+
+
+
+  <script type="text/x-handlebars" id="drinks">
+
+    <h3>Drinks</h3>
+    <br />
+
+    {{#each}}
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img src="./assets/boozioFPO.png" class="img-thumbnail">
+        </a>
+        <div class="media-body">
+          <h4>{{#link-to 'drink' this}}{{drinkName}}{{/link-to}}</h4>
+          <p>{{description}}</p>
+        </div>
+      </div>
+      <hr />
+    {{/each}}
+
+
+  </script>
+
+  <script type="text/x-handlebars" id="newdrink">
+    <h3>Create a new drink.</h3>
+
+    <p>{{input type="text" classNames="form-control" placeholder="Enter a new drink." value=newDrinkName action="createDrink"}}</p>
+    <p>{{input type="text" classNames="form-control" placeholder="Enter a description." value=newDescription action="createDrink"}}</p>
+  </script>
+
+  <script type="text/x-handlebars" id="drink">
+    <button class="btn btn-danger btn-xs pull-right" {{action "doDeleteDrink" this}}>Delete</button>
+    <h2>{{drinkName}}</h2>
+    {{description}}
+  </script>
+
+  <script type="text/x-handlebars" id="ingredients">
+    {{#link-to 'newingredient'}}New Ingredient{{/link-to}}
+
+
+    <h3>Ingredients</h3>
+    <br />
+
+    {{#each}}
+      <div class="media">
+        <a class="pull-left" href="#">
+          <img src="./assets/boozioFPO.png" class="img-thumbnail">
+        </a>
+        <div class="media-body">
+          <h4>{{#link-to 'ingredient' this}}{{ingredientName}}{{/link-to}}</h4>
+        </div>
+      </div>
+      <hr />
+    {{/each}}
+  </script>
+
+  <script type="text/x-handlebars" id="newingredient">
+    <p>Create a new ingredient.</p>
+
+    <p>{{input type="text" classNames="form-control" placeholder="Enter a new ingredient." value=newIngredientName action="createIngredient"}}</p>
+  </script>
+
+  <script type="text/x-handlebars" id="ingredient">
+    <button class="btn btn-danger btn-xs" {{action "doDeleteIngredient" this}}>Delete</button>
+    Drink Name: {{ingredientName}}
+  </script>
+
+  <!-- JSville -->
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.5.1.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/bootstrap.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
+
+  <!-- firebase disabled for now
+  <script src="js/libs/firebase.js"></script>
+  <script src="js/libs/emberfire.js"></script>
+  -->
+
+  <script src="js/boozio.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>
